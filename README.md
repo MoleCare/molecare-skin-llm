@@ -131,10 +131,9 @@ Thank you to everyone who has helped molecare-skin-llm.
 
 <!-- readme: contributors,bots/- -start -->
 <p align="center">
-  <img src=".github/contributors.svg" width="172" alt="Yauhen Bichel, GRAVITY, Mark Xian" />
-</p>
-<p align="center">
-  <a href="https://github.com/YauhenBichel">Yauhen Bichel</a><span> · </span><a href="https://github.com/agnish-dev">GRAVITY</a><span> · </span><a href="https://github.com/xianjianlf2">Mark Xian</a>
+  <a href="https://github.com/YauhenBichel" title="Yauhen Bichel"><img src=".github/faces/YauhenBichel.svg" width="87" height="99" alt="Yauhen Bichel" /></a>
+  <a href="https://github.com/agnish-dev" title="GRAVITY"><img src=".github/faces/agnish-dev.svg" width="66" height="75" alt="GRAVITY" /></a>
+  <a href="https://github.com/xianjianlf2" title="Mark Xian"><img src=".github/faces/xianjianlf2.svg" width="72" height="82" alt="Mark Xian" /></a>
 </p>
 <!-- readme: contributors,bots/- -end -->
 
