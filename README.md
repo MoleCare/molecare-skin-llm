@@ -130,33 +130,12 @@ the large folder.
 Thank you to everyone who has helped molecare-skin-llm.
 
 <!-- readme: contributors,bots/- -start -->
-<table>
-	<tbody>
-		<tr>
-			<td align="center">
-				<a href="https://github.com/YauhenBichel">
-					<img src="https://avatars.githubusercontent.com/YauhenBichel?s=48" width="48" alt="Yauhen Bichel" />
-					<br />
-					<sub><b>Yauhen Bichel</b></sub>
-				</a>
-			</td>
-			<td align="center">
-				<a href="https://github.com/agnish-dev">
-					<img src="https://avatars.githubusercontent.com/agnish-dev?s=48" width="48" alt="GRAVITY" />
-					<br />
-					<sub><b>GRAVITY</b></sub>
-				</a>
-			</td>
-			<td align="center">
-				<a href="https://github.com/xianjianlf2">
-					<img src="https://avatars.githubusercontent.com/xianjianlf2?s=48" width="48" alt="Mark Xian" />
-					<br />
-					<sub><b>Mark Xian</b></sub>
-				</a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<p align="center">
+  <img src=".github/contributors.svg" width="172" alt="Yauhen Bichel, GRAVITY, Mark Xian" />
+</p>
+<p align="center">
+  <a href="https://github.com/YauhenBichel">Yauhen Bichel</a><span> · </span><a href="https://github.com/agnish-dev">GRAVITY</a><span> · </span><a href="https://github.com/xianjianlf2">Mark Xian</a>
+</p>
 <!-- readme: contributors,bots/- -end -->
 
 The list is filled by [Contributors](./.github/workflows/contributors.yml) from
