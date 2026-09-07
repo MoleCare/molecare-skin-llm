@@ -131,9 +131,9 @@ Thank you to everyone who has helped molecare-skin-llm.
 
 <!-- readme: contributors,bots/- -start -->
 <p align="center">
-  <a href="https://github.com/YauhenBichel" title="Yauhen Bichel"><img src=".github/faces/YauhenBichel.svg" width="87" height="99" alt="Yauhen Bichel" /></a>
-  <a href="https://github.com/agnish-dev" title="Mondal"><img src=".github/faces/agnish-dev.svg" width="66" height="75" alt="Mondal" /></a>
-  <a href="https://github.com/xianjianlf2" title="Mark Xian"><img src=".github/faces/xianjianlf2.svg" width="72" height="82" alt="Mark Xian" /></a>
+  <a href="https://github.com/YauhenBichel" title="Yauhen Bichel" aria-label="Yauhen Bichel"><img src=".github/faces/YauhenBichel.svg" width="87" height="99" alt="Yauhen Bichel" /></a>
+  <a href="https://github.com/agnish-dev" title="Mondal" aria-label="Mondal"><img src=".github/faces/agnish-dev.svg" width="66" height="75" alt="Mondal" /></a>
+  <a href="https://github.com/xianjianlf2" title="Mark Xian" aria-label="Mark Xian"><img src=".github/faces/xianjianlf2.svg" width="72" height="82" alt="Mark Xian" /></a>
 </p>
 <!-- readme: contributors,bots/- -end -->
 
