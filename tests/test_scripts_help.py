@@ -39,6 +39,12 @@ class ScriptsHelpTest(unittest.TestCase):
         self.assertIn("--iters", text)
         self.assertIn("--resume", text)
 
+    def test_fuse_help_offers_gguf(self) -> None:
+        text = _help("fuse_and_export.py")
+        self.assertIn("--gguf", text)
+        self.assertIn("--convert-script", text)
+        self.assertIn("NOT applied", text)
+
     def test_chat_help(self) -> None:
         text = _help("chat.py")
         self.assertIn("prompt", text)
