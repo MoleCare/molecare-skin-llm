@@ -50,7 +50,10 @@ Skincare rules are **not** copied into this repository. They load from a sibling
 ### Running without the harness
 
 Without that checkout, `SkinGuard` cannot load, and the tests that exercise it
-**skip rather than fail**. Everything else still runs: the data loaders and training.
+**skip rather than fail** on a contributor's machine. In CI the `safety` job runs
+them against the real harness (checked out with a read token) and **fails** if it
+cannot load, because `SKIN_CARE_HARNESS_REQUIRED=1` is set there. Everything else
+still runs: the data loaders and training.
 
 Be aware of what a green run means in that case. A skipped safety test is not a
 passing safety test, and this repository's central claim is that the harness stops

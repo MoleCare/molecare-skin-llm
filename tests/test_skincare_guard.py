@@ -1,5 +1,6 @@
-import unittest
+import os
 import sys
+import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -14,6 +15,14 @@ class SkincareGuardTest(unittest.TestCase):
         try:
             cls.guard = SkincareGuard()
         except (FileNotFoundError, ImportError) as exc:
+            # A skipped safety test is not a passing safety test. CI sets
+            # SKIN_CARE_HARNESS_REQUIRED so a missing harness fails loudly there;
+            # a contributor without the private checkout still gets a skip.
+            if os.environ.get("SKIN_CARE_HARNESS_REQUIRED"):
+                raise AssertionError(
+                    "skin-care-harness is required in this environment but could not "
+                    f"be loaded: {exc}. Set SKIN_CARE_HARNESS_PYTHON to its packages/python."
+                ) from exc
             raise unittest.SkipTest(
                 f"skin-care-harness not installed locally: {exc}"
             ) from exc
