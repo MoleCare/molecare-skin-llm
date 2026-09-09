@@ -78,6 +78,12 @@ Data for `skincare-qa` still comes from [molecare-mcp](https://github.com/MoleCa
 
 ## Serve (cloud or laptop)
 
+> **What Ollama serves.** The Modelfile written by `fuse_and_export.py` points at
+> the stock `llama3.2:1b` **plus the system prompt** unless you pass `--gguf`, in
+> which case it points at the fused fine-tuned weights converted with llama.cpp's
+> `convert_hf_to_gguf.py`. The script prints which one it wrote. Do not describe
+> the default as the fine-tune.
+
 Pull the tiny bases (you already have `llama3.2:1b`):
 
 ```bash
