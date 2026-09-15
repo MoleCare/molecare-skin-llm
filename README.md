@@ -61,13 +61,14 @@ What does and does not run from a plain clone:
 |---|---|
 | `scripts/train.py` | **works**, from the committed splits in `data/skincare-qa/` |
 | the test suite | **works**, with the safety tests skipping |
-| `scripts/build_data.py` | **no** — reads the private `molecare-webapp`, then validates through the private harness |
+| `scripts/build_data.py` | **no** — needs a local `molecare-mcp` clone, then validates through the private harness (`molecare-webapp` is optional) |
 | `scripts/serve.py` | **no** — builds a `SkincareGuard` at start-up |
 | `scripts/chat.py` | **no** — same guard |
 
-The three that do not run fail with a `FileNotFoundError` telling you to clone
-`skin-care-harness`, which is an instruction you cannot follow from outside. That
-is the thing to fix, not a message to work around.
+`serve.py` and `chat.py` fail with a `FileNotFoundError` telling you to clone
+`skin-care-harness`, which is an instruction you cannot follow from outside.
+`build_data.py` first asks for a `molecare-mcp` clone, and then fails the same
+way at the harness. That is the thing to fix, not a message to work around.
 
 Be aware of what a green run means in that case. A skipped safety test is not a
 passing safety test, and this repository's central claim is that the harness stops
@@ -88,9 +89,9 @@ PYTHONPATH=src python scripts/train.py skincare-qa
 
 The splits are committed under `data/skincare-qa/`, so training starts from the
 repository as cloned. There is no `build_data.py` step above on purpose:
-rebuilding the data reads `molecare-webapp` and then validates the result
-through `skin-care-harness`, and both are private, so that script cannot run
-outside MoleCare. `molecare-ml` is image CNNs and is not used here.
+rebuilding the data reads a local `molecare-mcp` clone (and `molecare-webapp`,
+if it is there) and then validates the result through `skin-care-harness`,
+which is private, so that script cannot run outside MoleCare. `molecare-ml` is image CNNs and is not used here.
 
 ## Serve (cloud or laptop)
 
