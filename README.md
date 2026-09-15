@@ -4,7 +4,7 @@
 [![CI](https://github.com/MoleCare/molecare-skin-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/MoleCare/molecare-skin-llm/actions/workflows/ci.yml)
 [![Contributors](https://img.shields.io/github/contributors/MoleCare/molecare-skin-llm)](https://github.com/MoleCare/molecare-skin-llm#contributors)
 
-**Not a medical device.**
+> **Not a medical device.** Anything this model writes is educational. It is **not** a diagnosis. Always seek care from a qualified clinician for concerning skin changes.
 
 > The `python-vibe` coding model that used to live here has moved to
 > [YauhenBichel/python-vibe](https://github.com/YauhenBichel/python-vibe). This
@@ -34,8 +34,9 @@ whether that draft ships. The harness is not a second model.
 > **`skin-care-harness` is currently a private repository.** If you are outside MoleCare
 > you cannot clone it, and the skincare rules below will not load. What that means in
 > practice is set out in [Running without the harness](#running-without-the-harness).
-> Making it public, or removing the dependency, is tracked in
-> [#19](https://github.com/MoleCare/molecare-skin-llm/issues/19).
+> Making it public, or removing the dependency, is the open question. It is
+> the reason [#10](https://github.com/MoleCare/molecare-skin-llm/issues/10) cannot
+> be closed by anyone outside MoleCare either.
 
 ## Harnesses
 
@@ -52,15 +53,28 @@ Skincare rules are **not** copied into this repository. They load from a sibling
 Without that checkout, `SkinGuard` cannot load, and the tests that exercise it
 **skip rather than fail** on a contributor's machine. In CI the `safety` job runs
 them against the real harness (checked out with a read token) and **fails** if it
-cannot load, because `SKIN_CARE_HARNESS_REQUIRED=1` is set there. Everything else
-still runs: the data loaders and training.
+cannot load, because `SKIN_CARE_HARNESS_REQUIRED=1` is set there.
+
+What does and does not run from a plain clone:
+
+| | outside MoleCare |
+|---|---|
+| `scripts/train.py` | **works**, from the committed splits in `data/skincare-qa/` |
+| the test suite | **works**, with the safety tests skipping |
+| `scripts/build_data.py` | **no** — needs a local `molecare-mcp` clone, then validates through the private harness (`molecare-webapp` is optional) |
+| `scripts/serve.py` | **no** — builds a `SkincareGuard` at start-up |
+| `scripts/chat.py` | **no** — same guard |
+
+`serve.py` and `chat.py` fail with a `FileNotFoundError` telling you to clone
+`skin-care-harness`, which is an instruction you cannot follow from outside.
+`build_data.py` first asks for a `molecare-mcp` clone, and then fails the same
+way at the harness. That is the thing to fix, not a message to work around.
 
 Be aware of what a green run means in that case. A skipped safety test is not a
 passing safety test, and this repository's central claim is that the harness stops
 the model shipping a diagnosis. Treat a green CI badge here as covering everything
 *except* the part that matters most, until
-[#19](https://github.com/MoleCare/molecare-skin-llm/issues/19) and
-[#10](https://github.com/MoleCare/molecare-skin-llm/issues/10) are resolved.
+[#10](https://github.com/MoleCare/molecare-skin-llm/issues/10) is resolved.
 
 ## Train (Mac / MLX 3.13)
 
@@ -70,11 +84,14 @@ cd molecare-skin-llm
 /opt/homebrew/bin/python3.13 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-PYTHONPATH=src python scripts/build_data.py
 PYTHONPATH=src python scripts/train.py skincare-qa
 ```
 
-Data for `skincare-qa` still comes from [molecare-mcp](https://github.com/MoleCare/molecare-mcp) + `molecare-webapp` (private). `molecare-ml` is image CNNs — unused.
+The splits are committed under `data/skincare-qa/`, so training starts from the
+repository as cloned. There is no `build_data.py` step above on purpose:
+rebuilding the data reads a local `molecare-mcp` clone (and `molecare-webapp`,
+if it is there) and then validates the result through `skin-care-harness`,
+which is private, so that script cannot run outside MoleCare. `molecare-ml` is image CNNs and is not used here.
 
 ## Serve (cloud or laptop)
 
