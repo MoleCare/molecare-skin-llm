@@ -38,6 +38,17 @@ whether that draft ships. The harness is not a second model.
 > the reason [#10](https://github.com/MoleCare/molecare-skin-llm/issues/10) cannot
 > be closed by anyone outside MoleCare either.
 
+## What kind of model this is
+
+**A small language model (SLM).** Same family as the large ones — a decoder that
+predicts the next token — only sized to run on a cheap box instead of a GPU pod.
+Nothing about the architecture is special; the size is the point.
+
+Here that is **Llama-3.2-1B-Instruct in 4-bit** with a LoRA adapter (rank 8, on
+`q_proj` and `v_proj`), about 700 MB in total. Trained with MLX, served with
+Ollama and a small Python sidecar. It is not a vision model and never sees a
+photo: text in, text out, with the harness deciding whether the draft ships.
+
 ## Harnesses
 
 | Surface | What it checks | On block |
