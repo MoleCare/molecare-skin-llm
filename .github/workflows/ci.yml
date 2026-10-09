@@ -48,4 +48,4 @@ jobs:
           PYTHONPATH: src
           SKIN_CARE_HARNESS_PYTHON: ${{ github.workspace }}/skin-care-harness/packages/python
           SKIN_CARE_HARNESS_REQUIRED: "1"
-        run: python -m unittest tests.test_skincare_guard -v
+        run: python -m unittest tests.test_skincare_guard tests.test_sun_myths -v
