@@ -87,12 +87,21 @@ the model shipping a diagnosis. Treat a green CI badge here as covering everythi
 *except* the part that matters most, until
 [#10](https://github.com/MoleCare/molecare-skin-llm/issues/10) is resolved.
 
-## Train (Mac / MLX 3.13)
+## Run the tests (any OS)
+
+```bash
+python3 -m unittest discover -s tests -q
+```
+
+Python 3.10 or newer, no packages, no GPU, no Ollama, no tokens. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Train (Apple Silicon Mac, MLX, Python 3.13)
 
 ```bash
 git clone https://github.com/MoleCare/molecare-skin-llm.git
 cd molecare-skin-llm
-/opt/homebrew/bin/python3.13 -m venv .venv
+python3.13 -m venv .venv          # e.g. /opt/homebrew/bin/python3.13 with Homebrew
 source .venv/bin/activate
 pip install -r requirements.txt
 PYTHONPATH=src python scripts/train.py skincare-qa
