@@ -30,19 +30,23 @@ it, so nobody assumes it passed.
 
 ## Getting set up (no cloud, no secrets)
 
+The tests run on any operating system with **Python 3.10 or newer** and need
+no packages, no GPU, no Ollama and no tokens:
+
 ```bash
-git clone https://github.com/MoleCare/skincare-qa.git   # or this workbench path
-cd skincare-qa
-python3.13 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt   # MLX train — macOS Apple Silicon
-# harness tests only (Linux CI / no GPU):
-python -m unittest discover -s tests -q
+git clone https://github.com/MoleCare/molecare-skin-llm.git
+cd molecare-skin-llm
+python3 -m unittest discover -s tests -q      # on Windows: py -m unittest discover -s tests -q
 ```
 
+Two tests are skipped: they need the private skincare harness (see below).
+
+Only **training** needs more: an Apple Silicon Mac, Python 3.13 (MLX does not
+install on 3.14 yet) and `pip install -r requirements.txt` in a virtual
+environment. Training downloads public 4-bit bases from `mlx-community/*`.
+
 You do **not** need a Hugging Face token, Ollama, AWS, or a MoleCare API key
-to run the harness tests. Training downloads public 4-bit bases from
-`mlx-community/*`.
+to run the tests.
 
 ### About the skincare harness tests
 
