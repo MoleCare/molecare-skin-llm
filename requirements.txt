@@ -1,5 +1,5 @@
 # Train on Apple Silicon with MLX LoRA / QLoRA.
 # Use Homebrew Python 3.13 — mlx does not install cleanly on 3.14 yet.
-mlx-lm[train]>=0.31.3
+mlx-lm[train]>=0.32.2
 pyyaml>=6.0.3
-huggingface_hub>=2.0.0
+huggingface_hub>=2.3.0
