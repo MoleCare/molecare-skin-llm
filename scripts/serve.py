@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from finetune.models import SPECS  # noqa: E402
-from harness.fallbacks import SKINCARE_FALLBACK  # noqa: E402
+from harness.fallbacks import fallback_for  # noqa: E402
 from harness.ollama_generate import OllamaGenerate  # noqa: E402
 from harness.run import complete  # noqa: E402
 from harness.skincare import SkincareGuard  # noqa: E402
@@ -32,7 +32,7 @@ def _routes():
         "/v1/skincare-qa": (
             OllamaGenerate(skin.ollama_base, skin.system),
             SkincareGuard(),
-            SKINCARE_FALLBACK,
+            fallback_for,
         ),
     }
 
