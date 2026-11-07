@@ -60,3 +60,36 @@ class SkincareGuardTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FallbackChoiceTest(unittest.TestCase):
+    """Runs without skin-care-harness: the choice of fallback is plain code."""
+
+    def test_sun_safety_block_gets_the_sun_fallback(self) -> None:
+        from harness.fallbacks import SKINCARE_FALLBACK, SUN_SAFETY_FALLBACK, fallback_for
+        from harness.types import Finding
+
+        dg009 = (Finding("DG102", "revise", ""), Finding("DG009", "block", "sunscreen causes"))
+        self.assertEqual(fallback_for(dg009), SUN_SAFETY_FALLBACK)
+        self.assertEqual(fallback_for((Finding("DG001", "block", "melanoma"),)), SKINCARE_FALLBACK)
+        self.assertEqual(fallback_for(()), SKINCARE_FALLBACK)
+        self.assertNotIn("mole", SUN_SAFETY_FALLBACK.lower())
+
+    def test_complete_calls_a_fallback_function_with_the_findings(self) -> None:
+        from harness.types import Finding, Outcome
+
+        seen = []
+
+        class Blocker:
+            def check(self, text, red_flags=None):
+                return Outcome("block", None, (Finding("DG009", "block", text),), "t")
+
+        def pick(findings):
+            seen.append(findings)
+            return "PICKED"
+
+        outcome = complete(lambda _p: "draft", Blocker(), pick, "q")
+        self.assertTrue(outcome.fallback)
+        self.assertEqual(outcome.output, "PICKED")
+        self.assertEqual(seen[0][0].rule_id, "DG009")
+        self.assertEqual(complete(lambda _p: "draft", Blocker(), "FIXED", "q").output, "FIXED")
